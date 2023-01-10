@@ -69,11 +69,11 @@ app.get("/", (req: Request, res: Response) => {
   res.send("FIND-RECIPE API SAYS HELLO TO YOU!");
 });
 
-app.all("*", (req: Request, res: Response) => {
-  res
-    .status(404)
-    .json({ status: "fail", message: "This route doesn't exist on server!" });
-});
+// app.all("*", (req: Request, res: Response) => {
+//   res
+//     .status(404)
+//     .json({ status: "fail", message: "This route doesn't exist on server!" });
+// });
 
 app.use(errorHandler);
 
