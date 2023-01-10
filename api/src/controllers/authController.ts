@@ -59,7 +59,7 @@ const signIn = asyncWrapper(async (req: Request, res: Response) => {
     httpOnly: true,
     secure: true,
     sameSite: "none",
-    domain: "https://recipapa.netlify.app/",
+    // domain: "https://recipapa.netlify.app/",
     path: "https://recipapa.netlify.app/",
   });
 
