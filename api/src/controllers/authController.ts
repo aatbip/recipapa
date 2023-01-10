@@ -43,6 +43,9 @@ const signIn = asyncWrapper(async (req: Request, res: Response) => {
   const accessToken = user.createAccessToken();
   const refreshToken = user.createRefreshToken();
 
+  console.log("ass", accessToken);
+  console.log("reff", refreshToken);
+
   await RefreshToken.create({
     refreshToken: refreshToken,
   });
@@ -54,8 +57,11 @@ const signIn = asyncWrapper(async (req: Request, res: Response) => {
     refreshToken,
   };
 
-  // res.cookie("userCredentials", JSON.stringify(userCredentials));
+  res.cookie("userCredentials", JSON.stringify(userCredentials));
 
+  const { ref } = JSON.parse(req.cookies.userCredentials);
+  console.log("token", ref);
+  
   return res.status(200).json(success(userCredentials));
 });
 

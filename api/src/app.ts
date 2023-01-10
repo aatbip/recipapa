@@ -38,7 +38,6 @@ app.use(
   })
 );
 
-app.use("/api", router);
 
 // Add headers before the routes are defined
 app.use(function (req, res, next) {
@@ -64,6 +63,9 @@ app.use(function (req, res, next) {
   // Pass to next layer of middleware
   next();
 });
+
+app.use("/api", router);
+
 
 app.get("/", (req: Request, res: Response) => {
   res.send("FIND-RECIPE API SAYS HELLO TO YOU!");
