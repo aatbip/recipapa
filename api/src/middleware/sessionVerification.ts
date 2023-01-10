@@ -71,11 +71,11 @@ const setNewAccessTokenByVerifyingRefreshToken = asyncWrapper(
     };
 
     res.cookie("userCredentials", JSON.stringify(userCredentials), {
-      httpOnly: false,
-      secure: false,
+      httpOnly: true,
+      secure: true,
       sameSite: "none",
-      domain: "http://localhost:3000",
-      path: "http://localhost:3000",
+      domain: "https://recipapa.netlify.app/",
+      path: "https://recipapa.netlify.app/",
     });
 
     setUser(accessToken, req, res, next);

@@ -44,8 +44,6 @@ const signIn = asyncWrapper(async (req: Request, res: Response) => {
   const accessToken = user.createAccessToken();
   const refreshToken = user.createRefreshToken();
 
-
-
   await RefreshToken.create({
     refreshToken: refreshToken,
   });
@@ -58,11 +56,11 @@ const signIn = asyncWrapper(async (req: Request, res: Response) => {
   };
 
   res.cookie("userCredentials", JSON.stringify(userCredentials), {
-    httpOnly: false,
-    secure: false,
+    httpOnly: true,
+    secure: true,
     sameSite: "none",
-    domain: "http://localhost:3000",
-    path: "http://localhost:3000"
+    domain: "https://recipapa.netlify.app/",
+    path: "https://recipapa.netlify.app/",
   });
 
   return res.status(200).json(success(userCredentials));
