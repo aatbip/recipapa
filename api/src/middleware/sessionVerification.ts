@@ -75,7 +75,7 @@ const setNewAccessTokenByVerifyingRefreshToken = asyncWrapper(
       secure: true,
       sameSite: "none",
       // domain: "https://recipapa.netlify.app/",
-      path: "https://recipapa.netlify.app/",
+      // path: "https://recipapa.netlify.app",
     });
 
     setUser(accessToken, req, res, next);
