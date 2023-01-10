@@ -22,8 +22,8 @@ if (process.env.NODE_ENV === "production") {
 dbConnection();
 
 app.use(cookieParser());
-app.use(helmet());
-app.use(helmet.crossOriginResourcePolicy({ policy: "cross-origin" }));
+// app.use(helmet());
+// app.use(helmet.crossOriginResourcePolicy({ policy: "cross-origin" }));
 app.use(bodyParser.json());
 app.use(
   bodyParser.urlencoded({
@@ -38,6 +38,11 @@ app.use(
   })
 );
 
+app.use(function (req, res, next) {
+  res.header("Access-Control-Allow-Headers", "true");
+  res.setHeader('Access-Control-Allow-Credentials', "true");
+  next();
+});
 
 app.use("/api", router);
 

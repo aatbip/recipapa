@@ -5,8 +5,9 @@
   "main": "app.js",
   "scripts": {
     "dev": "npx nodemon",
-    "build": "npm install && rimraf ./build && tsc",
-    "start": "npm run build && node build/app.js"
+    "build": "npm install && rimraf ./build && tsc && npm run copy-files",
+    "start": "npm run build && node build/app.js",
+    "copy-files": "cp -r ./src/public/ ./build/"
   },
   "author": "",
   "license": "ISC",
