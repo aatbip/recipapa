@@ -72,7 +72,7 @@ const setNewAccessTokenByVerifyingRefreshToken = asyncWrapper(
 
     res.cookie("userCredentials", JSON.stringify(userCredentials), {
       httpOnly: false,
-      secure: true,
+      secure: false,
       sameSite: "none",
       domain: "http://localhost:3000",
       path: "http://localhost:3000",
