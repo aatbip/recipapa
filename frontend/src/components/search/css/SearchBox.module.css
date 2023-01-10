@@ -1,0 +1,29 @@
+.container {
+  position: relative;
+}
+
+.container input {
+  padding: 24px;
+  width: 400px;
+  border: 1px solid #dcdcdc;
+  border-radius: 12px;
+  font-weight: 500;
+  font-size: 18px;
+  font-family: var(--font-family);
+}
+
+.container input::placeholder {
+  color: var(--color-variant-black);
+  font-weight: 500;
+  font-size: 18px;
+  font-family: var(--font-family);
+}
+
+.container input:focus {
+  outline: none;
+}
+@media only screen and (max-width: 450px) {
+  .container input {
+    width: 350px;
+  }
+}

@@ -1,0 +1,39 @@
+.container {
+  width: 100%;
+}
+
+.wrapper {
+  max-width: 1450px;
+  width: 85%;
+  margin: 0 auto;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  padding: 40px 0px;
+  color: var(--color-variant-black);
+}
+
+.header span {
+  font-size: 25px;
+}
+
+.recipe_cards_container {
+  display: flex;
+  gap: 33.33px;
+  flex-wrap: wrap;
+  
+}
+
+@media only screen and (max-width: 745px) {
+  .recipe_cards_container {
+    justify-content: center;
+  }
+}
+@media only screen and (max-width: 450px) {
+  .header {
+    flex-wrap: wrap-reverse;
+    gap: 20px; 
+  }
+}

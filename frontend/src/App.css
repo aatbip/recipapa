@@ -1,0 +1,37 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500&display=swap");
+
+@font-face {
+  font-family: "Maison Neue";
+  src: url("/public/fonts/MaisonNeue-LightItalic.woff2") format("woff2"),
+    url("/public/fonts/MaisonNeue-LightItalic.woff") format("woff"),
+    url("/public/fonts/MaisonNeue-LightItalic.ttf") format("truetype");
+  font-weight: 300;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: "Maison Neue";
+  src: url("/public/fonts/MaisonNeue-Light.woff2") format("woff2"),
+    url("/public/fonts/MaisonNeue-Light.woff") format("woff"),
+    url("/public/fonts/MaisonNeue-Light.ttf") format("truetype");
+  font-weight: 300;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Maison Neue";
+  src: url("/public/fonts/MaisonNeue-MediumItalic.woff2") format("woff2"),
+    url("/public/fonts/MaisonNeue-MediumItalic.woff") format("woff"),
+    url("/public/fonts/MaisonNeue-MediumItalic.ttf") format("truetype");
+  font-weight: 500;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: "Maison Neue";
+  src: url("/public/fonts/MaisonNeue-Book.woff2") format("woff2"),
+    url("/public/fonts/MaisonNeue-Book.woff") format("woff"),
+    url("/public/fonts/MaisonNeue-Book.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+}

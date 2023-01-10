@@ -1,0 +1,48 @@
+.wrapper {
+  margin: 0 auto;
+  text-align: center;
+  width: 400px;
+}
+
+.wrapper h1 {
+  font-size: calc(var(--font-size-heading) - 1em);
+  padding: 10px 0px;
+}
+
+.wrapper form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.wrapper input {
+  border: none;
+  padding: 10px 30px;
+  font-size: var(--font-size-text);
+  border-radius: 20px;
+}
+
+.wrapper input:focus {
+  outline: none;
+  border: none;
+}
+
+.wrapper input::placeholder {
+  font-family: var(--font-family);
+  font-size: var(--font-size-text);
+}
+
+.wrapper input[type="submit"] {
+  padding: 10px 30px;
+  background-color: var(--color-variant-white);
+  border: 2px solid rgb(0, 0, 0);
+  border-radius: 20px;
+  font-size: var(--font-size-text);
+  font-family: var(--font-family);
+}
+
+.wrapper input[type="submit"]:hover {
+  background-color: var(--color-variant-main);
+  cursor: pointer;
+  opacity: 0.7;
+}

@@ -1,0 +1,99 @@
+.container {
+  width: 100%;
+}
+
+.wrapper {
+  max-width: 1450px;
+  width: 85%;
+  margin: 0 auto;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 40px 0px;
+}
+
+.header aside {
+  display: flex;
+  gap: 20px;
+  width: 220px;
+  align-items: center;
+}
+
+.header img,
+.header button {
+  cursor: pointer;
+}
+
+.d_flex {
+  display: flex;
+  gap: 10px;
+}
+
+@media only screen and (max-width: 450px) {
+  .d_flex {
+    width: 90vw;
+  }
+}
+
+.ingredient_list {
+  background-color: #fff;
+  border: 1px solid #dcdcdc;
+  border-radius: 100px;
+  padding: 3px 8px;
+  text-align: center;
+  cursor: pointer;
+  color: var(--color-variant-black);
+  font-size: var(--font-size-small);
+  font-weight: 500;
+}
+
+.create_recipe_form {
+  width: 90%;
+  margin: 0 auto;
+  padding-bottom: 10em;
+}
+
+.create_recipe_form p {
+  font-size: calc(var(--font-size-small) + 5px);
+  padding: 10px 0px;
+}
+
+.create_recipe_form ul {
+  padding: 10px 0px;
+}
+
+.create_recipe_form ul li {
+  margin-top: 5px;
+}
+
+.create_recipe_form input {
+  padding: 15px 24px;
+  width: 100%;
+
+  border: 1px solid #dcdcdc;
+  border-radius: 12px;
+}
+
+.create_recipe_form input::placeholder {
+  font-family: var(--font-family);
+}
+
+.create_recipe_form textarea {
+  padding: 15px 24px;
+  width: 100%;
+  border: 1px solid #dcdcdc;
+  border-radius: 12px;
+  font-family: var(--font-family);
+  height: 150px; 
+}
+
+.create_recipe_form input:focus {
+  outline: none;
+}
+
+.create_recipe_form textarea:focus {
+  outline: none;
+}

@@ -1,0 +1,43 @@
+.container {
+  width: 100%;
+}
+
+.wrapper {
+  width: 85%;
+  margin: 0 auto;
+}
+
+.wrapper p {
+  color: var(--color-variant-gray);
+}
+
+.sub_heading {
+  font-weight: 600;
+  font-size: 18px;
+  line-height: 20px;
+  letter-spacing: -0.01em;
+  color: #2e2e2e;
+}
+
+.top_right {
+    text-align: right;
+    line-height: 5em;
+}
+
+.top {
+    display: flex; 
+    justify-content: space-between;
+    flex-wrap: wrap;
+    padding: 150px 0px;
+}
+
+.top_left p {
+    width: 300px; 
+    margin-top: 1em; 
+}
+
+.bottom {
+    padding: 20px 0px; 
+    display: flex;
+    justify-content: space-between;
+}
