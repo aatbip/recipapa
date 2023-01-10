@@ -33,7 +33,7 @@ const MyRecipe = () => {
           {isLoading ? (
             <></>
           ) : (
-            userRecipe.map((recipe) => {
+            userRecipe?.map((recipe) => {
               return (
                 <RecipeCard
                   key={recipe._id}
