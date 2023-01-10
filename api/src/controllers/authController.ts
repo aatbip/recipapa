@@ -54,7 +54,7 @@ const signIn = asyncWrapper(async (req: Request, res: Response) => {
     refreshToken,
   };
 
-  res.cookie("userCredentials", JSON.stringify(userCredentials));
+  // res.cookie("userCredentials", JSON.stringify(userCredentials));
 
   return res.status(200).json(success(userCredentials));
 });
