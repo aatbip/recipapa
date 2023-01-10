@@ -38,11 +38,9 @@ const setNewAccessTokenByVerifyingRefreshToken = asyncWrapper(
   ) => {
     const { refreshToken } = JSON.parse(req.cookies.userCredentials);
 
-
     const isRefreshTokenExist = await RefreshToken.findOne({
       refreshToken: refreshToken,
     });
-
 
     if (!isRefreshTokenExist) {
       return res
@@ -67,12 +65,17 @@ const setNewAccessTokenByVerifyingRefreshToken = asyncWrapper(
 
     const userCredentials: IUserCredentials = {
       id: user._id,
-      username: user.username, 
+      username: user.username,
       accessToken,
       refreshToken,
     };
 
-    res.cookie("userCredentials", JSON.stringify(userCredentials));
+    res.cookie("userCredentials", JSON.stringify(userCredentials), {
+      httpOnly: true,
+      secure: true,
+      sameSite: "none",
+      domain: `${process.env.FRONTEND_URL}`,
+    });
 
     setUser(accessToken, req, res, next);
   }
