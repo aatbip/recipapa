@@ -75,6 +75,7 @@ const setNewAccessTokenByVerifyingRefreshToken = asyncWrapper(
       secure: false,
       sameSite: "none",
       domain: "http://localhost:3000",
+      path: "http://localhost:3000",
     });
 
     setUser(accessToken, req, res, next);

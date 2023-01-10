@@ -59,9 +59,10 @@ const signIn = asyncWrapper(async (req: Request, res: Response) => {
 
   res.cookie("userCredentials", JSON.stringify(userCredentials), {
     httpOnly: true,
-    secure: true,
+    secure: false,
     sameSite: "none",
-    domain: `${process.env.FRONTEND_URL}`
+    domain: "http://localhost:3000",
+    path: "http://localhost:3000"
   });
 
   return res.status(200).json(success(userCredentials));
