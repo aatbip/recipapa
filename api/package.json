@@ -5,7 +5,7 @@
   "main": "app.js",
   "scripts": {
     "dev": "npx nodemon",
-    "build": "rimraf ./build && tsc",
+    "build": "npm install && rimraf ./build && tsc",
     "start": "npm run build && node build/app.js"
   },
   "author": "",
