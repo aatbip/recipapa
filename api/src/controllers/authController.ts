@@ -58,8 +58,8 @@ const signIn = asyncWrapper(async (req: Request, res: Response) => {
   };
 
   res.cookie("userCredentials", JSON.stringify(userCredentials), {
-    httpOnly: true,
-    secure: false,
+    httpOnly: false,
+    secure: true,
     sameSite: "none",
     domain: "http://localhost:3000",
     path: "http://localhost:3000"
