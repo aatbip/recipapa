@@ -24,6 +24,7 @@ const signUp = asyncWrapper(async (req: Request, res: Response) => {
 
 const signIn = asyncWrapper(async (req: Request, res: Response) => {
   const { username, password } = req.body;
+  console.log("jwt", process.env.JWT_SECRET)
   if (!username || !password) {
     return res.status(400).json(failure("Enter all required fields!"));
   }
@@ -45,7 +46,7 @@ const signIn = asyncWrapper(async (req: Request, res: Response) => {
 
   const accessToken = "sdfdsfdsfdsfdsf234234324"
   const refreshToken = "46465sdf456234456sdf456"
-  
+
   console.log("ass", accessToken);
   console.log("reff", refreshToken);
 
