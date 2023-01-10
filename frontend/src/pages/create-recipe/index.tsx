@@ -64,15 +64,13 @@ const CreateRecipe: React.FC = () => {
   };
 
   React.useEffect(() => {
-    store.dispatch(resetForm()); 
+    store.dispatch(resetForm());
     store.dispatch(getIngredients());
-
 
     if (recipeId) store.dispatch(getOneRecipe(recipeId));
   }, []);
 
-  console.log(
-    "hello", recipeContents)
+  console.log("hello", recipeContents);
 
   const handleSubmit = async (e: React.SyntheticEvent) => {
     e.preventDefault();
@@ -85,10 +83,10 @@ const CreateRecipe: React.FC = () => {
       recipeIngredients.length === 0
     ) {
       toast.error("Please enter all fields!");
-      return; 
+      return;
     }
 
-    console.log(recipeContents.title); 
+    console.log(recipeContents.title);
 
     const formData = new FormData();
 
@@ -105,10 +103,6 @@ const CreateRecipe: React.FC = () => {
     });
 
     if (recipeId !== undefined) {
-      if (uploadedImages.length === 0) {
-        toast.error("Please add some images!")
-        return; 
-      }
       formData.append("uploadedImages", JSON.stringify(uploadedImages));
 
       try {
@@ -121,10 +115,10 @@ const CreateRecipe: React.FC = () => {
       }
     } else {
       if (recipeContents.images.length === 0) {
-        toast.error("Please add some images!")
-        return; 
+        toast.error("Please add some images!");
+        return;
       }
-      
+
       try {
         await axios.post(`/recipe/add/`, formData);
         toast.success("Your new recipe is added!");
