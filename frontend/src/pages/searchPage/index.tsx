@@ -72,11 +72,6 @@ const SearchPage = () => {
                 return (
                   <>
                     <RecipeCard key={ind} isMyRecipe={false} recipe={el} />
-                    <RecipeCard key={ind} isMyRecipe={false} recipe={el} />
-                    <RecipeCard key={ind} isMyRecipe={false} recipe={el} />
-                    <RecipeCard key={ind} isMyRecipe={false} recipe={el} />
-                    <RecipeCard key={ind} isMyRecipe={false} recipe={el} />
-                    <RecipeCard key={ind} isMyRecipe={false} recipe={el} />
                   </>
                 );
               })

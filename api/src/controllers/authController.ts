@@ -24,7 +24,7 @@ const signUp = asyncWrapper(async (req: Request, res: Response) => {
 
 const signIn = asyncWrapper(async (req: Request, res: Response) => {
   const { username, password } = req.body;
-  console.log("jwt", process.env.JWT_SECRET)
+  console.log("jwt", process.env.JWT_SECRET);
   if (!username || !password) {
     return res.status(400).json(failure("Enter all required fields!"));
   }
@@ -41,11 +41,11 @@ const signIn = asyncWrapper(async (req: Request, res: Response) => {
     return res.status(400).json(failure("Username or password is incorrect!"));
   }
 
-  // const accessToken = user.createAccessToken();
-  // const refreshToken = user.createRefreshToken();
+  const accessToken = user.createAccessToken();
+  const refreshToken = user.createRefreshToken();
 
-  const accessToken = "sdfdsfdsfdsfdsf234234324"
-  const refreshToken = "46465sdf456234456sdf456"
+  // const accessToken = "sdfdsfdsfdsfdsf234234324"
+  // const refreshToken = "46465sdf456234456sdf456"
 
   console.log("ass", accessToken);
   console.log("reff", refreshToken);
@@ -61,10 +61,12 @@ const signIn = asyncWrapper(async (req: Request, res: Response) => {
     refreshToken,
   };
 
-  res.cookie("userCredentials", JSON.stringify(userCredentials));
-
-  const { ref } = JSON.parse(req.cookies.userCredentials);
-  console.log("token", ref);
+  res.cookie("userCredentials", JSON.stringify(userCredentials), {
+    httpOnly: true,
+    secure: true,
+    sameSite: "none",
+    maxAge: 24 * 60 * 60 * 1000,
+  });
 
   return res.status(200).json(success(userCredentials));
 });
