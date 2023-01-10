@@ -40,9 +40,12 @@ const signIn = asyncWrapper(async (req: Request, res: Response) => {
     return res.status(400).json(failure("Username or password is incorrect!"));
   }
 
-  const accessToken = user.createAccessToken();
-  const refreshToken = user.createRefreshToken();
+  // const accessToken = user.createAccessToken();
+  // const refreshToken = user.createRefreshToken();
 
+  const accessToken = "sdfdsfdsfdsfdsf234234324"
+  const refreshToken = "46465sdf456234456sdf456"
+  
   console.log("ass", accessToken);
   console.log("reff", refreshToken);
 
@@ -61,7 +64,7 @@ const signIn = asyncWrapper(async (req: Request, res: Response) => {
 
   const { ref } = JSON.parse(req.cookies.userCredentials);
   console.log("token", ref);
-  
+
   return res.status(200).json(success(userCredentials));
 });
 
