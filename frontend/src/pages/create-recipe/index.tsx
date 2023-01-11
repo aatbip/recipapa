@@ -4,6 +4,7 @@ import toast from "react-hot-toast";
 import { useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
 import ImageUploader from "../../components/imageUploader/ImageUploader";
+import Spinner from "../../components/spinner/Spinner";
 import { Ingredient } from "../../interfaces/recipe.ingerface";
 import {
   addRecipeIngredient,
@@ -13,8 +14,10 @@ import {
   handleIngredientSuggestion,
   handleRecipeContent,
   removeImage,
+  removeNewIngredient,
   removeRecipeIngredient,
   removeSteps,
+  removeSuggestedIngredient,
   resetForm,
   selectRecipe,
 } from "../../redux/recipe/recipeSlice";
@@ -26,7 +29,6 @@ const CreateRecipe: React.FC = () => {
   const navigate = useNavigate();
 
   const {
-    isLoading,
     suggestedIngredients,
     newIngredient,
     recipeIngredients,
@@ -37,6 +39,7 @@ const CreateRecipe: React.FC = () => {
   const [inputValue, setInputValue] = React.useState("");
   const [steps, setSteps] = React.useState("");
   const [previewImage, setPreviewImage] = React.useState<Array<string>>([]);
+  const [isUploading, setIsUploading] = React.useState<boolean>(false);
 
   const [recipeIngredient, setRecipeIngredient] = React.useState({
     ingredientName: "",
@@ -70,8 +73,6 @@ const CreateRecipe: React.FC = () => {
     if (recipeId) store.dispatch(getOneRecipe(recipeId));
   }, []);
 
-  console.log("hello", recipeContents);
-
   const handleSubmit = async (e: React.SyntheticEvent) => {
     e.preventDefault();
     if (
@@ -85,8 +86,6 @@ const CreateRecipe: React.FC = () => {
       toast.error("Please enter all fields!");
       return;
     }
-
-    console.log(recipeContents.title);
 
     const formData = new FormData();
 
@@ -106,7 +105,9 @@ const CreateRecipe: React.FC = () => {
       formData.append("uploadedImages", JSON.stringify(uploadedImages));
 
       try {
+        setIsUploading(true);
         await axios.patch(`/recipe/${recipeId}`, formData);
+        setIsUploading(false);
         toast.success("Your recipe is updated!");
         navigate(-1);
         store.dispatch(resetForm());
@@ -120,7 +121,9 @@ const CreateRecipe: React.FC = () => {
       }
 
       try {
+        setIsUploading(true);
         await axios.post(`/recipe/add/`, formData);
+        setIsUploading(false);
         toast.success("Your new recipe is added!");
         navigate(-1);
         store.dispatch(resetForm());
@@ -153,6 +156,7 @@ const CreateRecipe: React.FC = () => {
         </div>
 
         <div className={styles.create_recipe_form}>
+          <Spinner isLoading={isUploading} positionAbsolute />
           <p>Recipe Title</p>
           <input
             type="text"
@@ -203,6 +207,7 @@ const CreateRecipe: React.FC = () => {
                 name="ingredientName"
                 placeholder="Type your ingredient"
                 value={inputValue}
+                autoComplete="off"
                 onChange={(e) => {
                   setInputValue(e.target.value);
                   store.dispatch(handleIngredientSuggestion(e.target.value));
@@ -224,6 +229,7 @@ const CreateRecipe: React.FC = () => {
                             };
                           });
                           setInputValue(ingredient.ingredientName);
+                          store.dispatch(removeSuggestedIngredient()); 
                         }}
                         className={styles.ingredient_list}
                       >
@@ -243,6 +249,7 @@ const CreateRecipe: React.FC = () => {
                         };
                       });
                       setInputValue(newIngredient);
+                      store.dispatch(removeNewIngredient()); 
                     }}
                     className={styles.ingredient_list}
                   >
@@ -278,6 +285,13 @@ const CreateRecipe: React.FC = () => {
             </div>
             <button
               onClick={() => {
+                if (
+                  !recipeIngredient.ingredientName ||
+                  !recipeIngredient.quantity
+                ) {
+                  toast.error("Please add Ingredient name and quantity!");
+                  return;
+                }
                 store.dispatch(addRecipeIngredient(recipeIngredient));
                 setRecipeIngredient({
                   ingredientName: "",

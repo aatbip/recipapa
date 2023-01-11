@@ -19,6 +19,7 @@ interface InitialState {
   recipeContents: RecipeContents;
   uploadedImages: string[];
   userRecipe: RecipeContents[];
+  isDeleted: boolean;
 }
 
 const initialState: InitialState = {
@@ -37,6 +38,7 @@ const initialState: InitialState = {
   },
   uploadedImages: [],
   userRecipe: [], //all recipe added by the user
+  isDeleted: false,
 };
 
 export const getIngredients = createAsyncThunk(
@@ -61,13 +63,6 @@ export const createIngredient = createAsyncThunk(
     } catch (error: any) {
       return rejectWithValue(error);
     }
-  }
-);
-
-export const createRecipe = createAsyncThunk(
-  "recipe/createRecipe",
-  async (data: any, { rejectWithValue }) => {
-    console.log(data);
   }
 );
 
@@ -180,6 +175,15 @@ const recipeSlice = createSlice({
         (el, ind) => ind !== action.payload
       );
     },
+    toggleIsDeleted: (state) => {
+      state.isDeleted = !state.isDeleted;
+    },
+    removeSuggestedIngredient: (state) => {
+      state.suggestedIngredients = [];
+    },
+    removeNewIngredient: (state) => {
+      state.newIngredient = "";
+    },
   },
   extraReducers: (builder) => {
     builder
@@ -201,17 +205,6 @@ const recipeSlice = createSlice({
         state.newIngredient = "";
       })
       .addCase(createIngredient.rejected, (state, action) => {
-        state.isLoading = false;
-      })
-
-      .addCase(createRecipe.pending, (state, action) => {
-        state.isLoading = true;
-      })
-      .addCase(createRecipe.fulfilled, (state, action) => {
-        state.isLoading = false;
-        toast.success("Your Recipe is Added!");
-      })
-      .addCase(createRecipe.rejected, (state, action) => {
         state.isLoading = false;
       })
 
@@ -261,6 +254,9 @@ export const {
   removeSteps,
   resetForm,
   handleUploadedImage,
+  toggleIsDeleted,
+  removeSuggestedIngredient,
+  removeNewIngredient,
 } = recipeSlice.actions;
 
 export default recipeSlice.reducer;

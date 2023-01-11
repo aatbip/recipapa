@@ -5,6 +5,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { IAuth } from "../../interfaces/auth.internface";
 import { login, selectAuth, signUp } from "../../redux/auth/authSlice";
 import store from "../../redux/store";
+import Spinner from "../spinner/Spinner";
 import styles from "./css/Login.module.css";
 
 interface ILogin {
@@ -13,6 +14,8 @@ interface ILogin {
 
 const Login: React.FC<ILogin> = ({ isSignUp }) => {
   const navigate = useNavigate();
+
+  const { isLoading } = useSelector(selectAuth);
 
   const [data, setData] = React.useState<IAuth>({
     username: "",
@@ -24,7 +27,7 @@ const Login: React.FC<ILogin> = ({ isSignUp }) => {
     setData((prev) => {
       return {
         ...prev,
-        [name]: value,
+        [name]: value.replace(/\s+/g, ""),
       };
     });
   };
@@ -58,6 +61,7 @@ const Login: React.FC<ILogin> = ({ isSignUp }) => {
 
   return (
     <div className={styles.wrapper}>
+      <Spinner isLoading={isLoading} positionAbsolute />
       {isSignUp ? <h1>SIGN UP</h1> : <h1>LOGIN</h1>}
       <form onSubmit={handleSubmit} autoSave="on">
         <input
@@ -72,7 +76,6 @@ const Login: React.FC<ILogin> = ({ isSignUp }) => {
           onChange={(e) => handleChange(e)}
           type="password"
           name="password"
-
           value={data.password}
           placeholder="Password"
         />

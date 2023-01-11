@@ -18,7 +18,7 @@ const VerifySession: React.FC<Prop> = ({ children }) => {
   const verifySession = async () => {
     const userCredentials = Cookies.get("userCredentials");
     if (userCredentials) {
-      if (isTokenExpired(JSON.parse(userCredentials).accessToken)) {
+      if (isTokenExpired(JSON.parse(userCredentials).refreshToken)) {
         store.dispatch(unSetUser());
         navigate("/");
         toast.error("Your token has expired. Please login again!");
@@ -36,26 +36,8 @@ const VerifySession: React.FC<Prop> = ({ children }) => {
     navigate("/");
   };
 
-  const sessionTimeOut = () => {
-    const userCredentials = Cookies.get("userCredentials");
-    if (userCredentials) {
-      if (isTokenExpired(JSON.parse(userCredentials).accessToken)) {
-        store.dispatch(unSetUser());
-        navigate("/");
-        toast.error("Your token has expired. Please login again!");
-        return;
-      }
-    }
-  };
-
   React.useEffect(() => {
     verifySession();
-
-    // const int = setInterval(() => {
-    //   sessionTimeOut();
-    // }, 10000);
-
-    // return () => clearInterval(int);
   }, []);
 
   return <>{children}</>;

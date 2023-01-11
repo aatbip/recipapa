@@ -4,6 +4,7 @@ import { createSearchParams, useNavigate } from "react-router-dom";
 import IngredientFilter from "../../components/ingredientFilter/IngredientFilter";
 import RecipeCard from "../../components/recipeCard/RecipeCard";
 import SearchBox from "../../components/search/SearchBox";
+import Spinner from "../../components/spinner/Spinner";
 import { searchRecipe, selectApp } from "../../redux/app/appSlice";
 import store from "../../redux/store";
 import styles from "./css/SearchPage.module.css";
@@ -66,7 +67,7 @@ const SearchPage = () => {
         <div className={styles.recipe_container}>
           <div className={styles.recipe_wrapper}>
             {isLoading ? (
-              <></>
+              <Spinner isLoading={isLoading} positionAbsolute={false} />
             ) : (
               queryFilteredRecipe.map((el, ind) => {
                 return (

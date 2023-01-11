@@ -9,6 +9,7 @@ import { URLSearchParams } from "url";
 import IngredientFilter from "../../components/ingredientFilter/IngredientFilter";
 import RecipeCard from "../../components/recipeCard/RecipeCard";
 import SearchBox from "../../components/search/SearchBox";
+import Spinner from "../../components/spinner/Spinner";
 import {
   getAllRecipe,
   searchRecipe,
@@ -110,11 +111,12 @@ const HomePage: React.FC = () => {
         </div>
         <div className={styles.recipe_card_container}>
           {isLoading ? (
-            <></>
+            <Spinner isLoading={isLoading} positionAbsolute={false} />
           ) : (
             recipe?.map((el) => {
               return (
                 <>
+
                   <RecipeCard key={el._id} isMyRecipe={false} recipe={el} />
                 </>
               );

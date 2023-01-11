@@ -2,7 +2,7 @@ import React from "react";
 import { toast } from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
 import { RecipeContents } from "../../interfaces/recipe.ingerface";
-import { deleteRecipe, getUserRecipe } from "../../redux/recipe/recipeSlice";
+import { deleteRecipe, getUserRecipe, toggleIsDeleted } from "../../redux/recipe/recipeSlice";
 import store from "../../redux/store";
 import styles from "./css/RecipeCard.module.css";
 
@@ -60,7 +60,8 @@ const RecipeCard: React.FC<Prop> = ({ recipe, isMyRecipe }) => {
             <div
               onClick={() => {
                 store.dispatch(deleteRecipe(recipe._id));
-                store.dispatch(getUserRecipe());
+                store.dispatch(getUserRecipe()); 
+                store.dispatch(toggleIsDeleted())
                 toast.success("You deleted one recipe just now!");
               }}
               style={{

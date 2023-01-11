@@ -71,7 +71,6 @@ export const searchRecipe = createAsyncThunk(
           ingredients: selectedIngredients,
         }),
       });
-      console.log(res);
       return res.data.data;
     } catch (error: any) {
       return rejectWithValue(error);
