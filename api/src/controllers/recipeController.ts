@@ -128,7 +128,7 @@ const updateRecipe = asyncWrapper(async (req: Request, res: Response) => {
 
   if (imagesToDelete) {
     imagesToDelete?.map(async (img) => {
-      await unlink(`${path.resolve(__dirname)}/../public/recipe/${img}`);
+      await unlink(`${path.resolve(__dirname)}/../../public/recipe/${img}`);
     });
   }
 
@@ -157,7 +157,7 @@ const removeRecipe = asyncWrapper(async (req: Request, res: Response) => {
   const recipe = await Recipe.findByIdAndDelete(recipeId);
 
   recipe?.images.map(async (img) => {
-    await unlink(`${path.resolve(__dirname)}/../public/recipe/${img}`);
+    await unlink(`${path.resolve(__dirname)}/../../public/recipe/${img}`);
   });
 
   res.status(200).json(success("Deleted!"));
