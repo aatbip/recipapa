@@ -313,7 +313,7 @@ const CreateRecipe: React.FC = () => {
           <div
             className={`${styles.d_flex}`}
             style={{
-              width: "400px",
+              width: "285px",
               flexWrap: "wrap",
             }}
           >

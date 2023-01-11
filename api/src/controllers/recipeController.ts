@@ -46,10 +46,7 @@ const createRecipe = asyncWrapper(
 const getOneRecipe = asyncWrapper(async (req: Request, res: Response) => {
   const { recipeId } = req.params;
 
-  const recipe = await Recipe.findById(recipeId).populate(
-    "userId",
-    "username"
-  );
+  const recipe = await Recipe.findById(recipeId).populate("userId", "username");
 
   res.status(200).json(success(recipe));
 });
@@ -155,7 +152,11 @@ const updateRecipe = asyncWrapper(async (req: Request, res: Response) => {
 const removeRecipe = asyncWrapper(async (req: Request, res: Response) => {
   const { recipeId } = req.params;
 
-  await Recipe.findByIdAndDelete(recipeId);
+  const recipe = await Recipe.findByIdAndDelete(recipeId);
+
+  recipe?.images.map(async (img) => {
+    await unlink(`${path.resolve(__dirname)}/../public/recipe/${img}`);
+  });
 
   res.status(200).json(success("Deleted!"));
 });
@@ -198,7 +199,6 @@ const searchRecipe = asyncWrapper(async (req: Request, res: Response) => {
     }
     return unique;
   }, []);
-
 
   res.status(200).json(success(recipe));
 });

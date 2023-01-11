@@ -2,8 +2,7 @@ import express, { Response, Request, NextFunction } from "express";
 
 import { signUp, signIn, signOut } from "../controllers/authController";
 import {
-  checkIfTokenExpired,
-  sessionVerification,
+  setNewAccessToken,
 } from "../middleware/sessionVerification";
 
 const router = express.Router();
@@ -11,6 +10,7 @@ const router = express.Router();
 router.post("/signup", signUp);
 router.post("/signin", signIn);
 router.post("/signout", signOut);
-router.get("/verifysession", sessionVerification, checkIfTokenExpired);
+router.post("/refresh", setNewAccessToken);
+
 
 export default router;

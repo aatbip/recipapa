@@ -27,8 +27,8 @@
 }
 
 .nav_items button {
-  background-color: #fff; 
-  border: 1px solid #DCDCDC;
+  background-color: #fff;
+  border: 1px solid #dcdcdc;
   border-radius: 100px;
   padding: 20px 32px;
   cursor: pointer;
@@ -44,14 +44,15 @@
 
 @media only screen and (max-width: 450px) {
   .nav_items button {
-    padding: 9px 22px; 
+    padding: 9px 22px;
+    width: 150px;
   }
 
   .nav_items {
-    gap: 50px; 
+    gap: 30px;
   }
 
   .nav_items {
-    padding-top: 20px; 
+    padding-top: 20px;
   }
 }

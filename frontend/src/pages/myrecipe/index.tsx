@@ -14,7 +14,6 @@ import styles from "./css/MyRecipe.module.css";
 const MyRecipe = () => {
   const navigate = useNavigate();
   const { isLoading, userRecipe, isDeleted } = useSelector(selectRecipe);
-  console.log("hello", isDeleted);
   React.useEffect(() => {
     store.dispatch(getUserRecipe());
   }, [isDeleted]);

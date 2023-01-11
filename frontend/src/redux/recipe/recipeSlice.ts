@@ -107,7 +107,7 @@ const recipeSlice = createSlice({
   reducers: {
     handleIngredientSuggestion: (state, action) => {
       if (action.payload) {
-        state.suggestedIngredients = state.ingredients.filter((el) => {
+        state.suggestedIngredients = state.ingredients?.filter((el) => {
           return el.ingredientName
             .toLowerCase()
             .includes(action.payload.toLowerCase());
@@ -116,14 +116,13 @@ const recipeSlice = createSlice({
         state.suggestedIngredients = [];
       }
 
-      if (state.suggestedIngredients.length == 0)
+      if (state.suggestedIngredients?.length == 0)
         state.newIngredient = action.payload;
     },
 
     addRecipeIngredient: (state, action) => {
       state.recipeIngredients = [...state.recipeIngredients, action.payload];
       state.suggestedIngredients = [];
-      console.log(state.recipeIngredients);
     },
 
     removeRecipeIngredient: (state, action) => {
@@ -157,7 +156,6 @@ const recipeSlice = createSlice({
     },
 
     removeSteps: (state, action) => {
-      console.log(action.payload);
       state.recipeContents.steps = state.recipeContents.steps.filter(
         (el) => el !== action.payload
       );

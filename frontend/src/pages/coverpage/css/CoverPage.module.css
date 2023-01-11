@@ -4,7 +4,7 @@
     #F54748 19%,
     #e46969 94%
   );
-  height: 100vh;
+  min-height: 100vh;
   width: 100%;
   display: flex;
   flex-direction: column;
@@ -14,6 +14,7 @@
 .wrapper {
   width: 60%;
   max-width: 1450px;
+  /* min-height: 100vh; */
   margin: 0 auto;
   display: flex;
   align-items: center;
@@ -37,15 +38,16 @@
 
 @media only screen and (max-width: 715px) {
   .heading {
-    font-size: calc(var(--font-size-heading) - 6px);
+    font-size: calc(var(--font-size-heading) - 8px);
   }
 
   .wrapper {
     flex-wrap: wrap;
+    gap: 2em; 
   }
 
   .container {
     justify-content: flex-start;
-    padding-top: 3em;
+    padding: 2em 0em; 
   }
 }

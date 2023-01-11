@@ -30,13 +30,30 @@ export const sessionVerification = asyncWrapper(
   }
 );
 
-const setNewAccessTokenByVerifyingRefreshToken = asyncWrapper(
+const setUser = async (
+  accessToken: string,
+  req: IGetAuthorizationHeaderRequest,
+  res: Response,
+  next: NextFunction
+) => {
+  try {
+    const { payload, expired } = verifyJwt(accessToken);
+
+    req.user = payload as IJwtPayload;
+    return next();
+  } catch (error) {
+    next(error);
+  }
+};
+
+
+export const setNewAccessToken = asyncWrapper(
   async (
     req: IGetAuthorizationHeaderRequest,
     res: Response,
     next: NextFunction
   ) => {
-    const { refreshToken } = JSON.parse(req.cookies.userCredentials);
+    const { refreshToken } = req.body;
 
     const isRefreshTokenExist = await RefreshToken.findOne({
       refreshToken: refreshToken,
@@ -70,51 +87,7 @@ const setNewAccessTokenByVerifyingRefreshToken = asyncWrapper(
       refreshToken,
     };
 
-    res.cookie("userCredentials", JSON.stringify(userCredentials), {
-      // httpOnly: true,
-      // secure: false,
-      // sameSite: "none",
-      // domain: "https://recipapa.netlify.app/",
-      // path: "https://recipapa.netlify.app",
-    });
-
-    setUser(accessToken, req, res, next);
+    res.status(200).json(userCredentials);
   }
 );
 
-const setUser = async (
-  accessToken: string,
-  req: IGetAuthorizationHeaderRequest,
-  res: Response,
-  next: NextFunction
-) => {
-  try {
-    const { payload, expired } = verifyJwt(accessToken);
-    if (expired === "jwt expired") {
-      return await setNewAccessTokenByVerifyingRefreshToken(req, res, next);
-    }
-    req.user = payload as IJwtPayload;
-    return next();
-  } catch (error) {
-    next(error);
-  }
-};
-
-export const checkIfTokenExpired = asyncWrapper(
-  async (req: Request, res: Response, next: NextFunction) => {
-    const authHeader = req.headers.authorization;
-    if (!authHeader || !authHeader.startsWith("Bearer")) {
-      return res
-        .status(404)
-        .json(
-          failure("Invalid authentication header. Please send bearer token. ")
-        );
-    }
-    const accessToken = authHeader.split(" ")[1];
-    const { payload, expired } = verifyJwt(accessToken);
-    if (expired === "jwt expired") {
-      return res.status(200).json("Exp");
-    }
-    return res.status(200).json("Token not expired!")
-  }
-);

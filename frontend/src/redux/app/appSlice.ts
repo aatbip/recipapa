@@ -83,7 +83,6 @@ export const getOneRecipe = createAsyncThunk(
   async (recipeId: string, { rejectWithValue }) => {
     try {
       const res = await axios.get(`/recipe/${recipeId}`);
-      console.log(res.data)
       return res.data.data;
     } catch (error: any) {
       return rejectWithValue(error);

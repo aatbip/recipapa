@@ -24,7 +24,6 @@ const signUp = asyncWrapper(async (req: Request, res: Response) => {
 
 const signIn = asyncWrapper(async (req: Request, res: Response) => {
   const { username, password } = req.body;
-
   if (!username || !password) {
     return res.status(400).json(failure("Enter all required fields!"));
   }
@@ -54,14 +53,6 @@ const signIn = asyncWrapper(async (req: Request, res: Response) => {
     accessToken,
     refreshToken,
   };
-
-  res.cookie("userCredentials", JSON.stringify(userCredentials), {
-    // httpOnly: true,
-    // secure: false,
-    // sameSite: "none",
-    // domain: "https://recipapa.netlify.app/",
-    // path: "https://recipapa.netlify.app",
-  });
 
   return res.status(200).json(success(userCredentials));
 });

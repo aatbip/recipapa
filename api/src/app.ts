@@ -1,5 +1,5 @@
 import http from "http";
-import express, { Request, Response } from "express";
+import express, { NextFunction, Request, Response } from "express";
 require("express-async-errors");
 import dotenv from "dotenv";
 dotenv.config();
@@ -34,13 +34,14 @@ app.use(express.static(__dirname + "/public"));
 app.use(
   cors({
     credentials: true,
-    origin: [`${process.env.FRONTEND_URL}`],
+    origin: `${process.env.FRONTEND_URL}`,
   })
 );
 
+app.use("/api", router);
 
 // Add headers before the routes are defined
-app.use(function (req, res, next) {
+app.use(function (req: Request, res: Response, next: NextFunction) {
   // Website you wish to allow to connect
   res.setHeader("Access-Control-Allow-Origin", `${process.env.FRONTEND_URL}`);
 
@@ -63,9 +64,6 @@ app.use(function (req, res, next) {
   // Pass to next layer of middleware
   next();
 });
-
-app.use("/api", router);
-
 
 app.get("/", (req: Request, res: Response) => {
   res.send("FIND-RECIPE API SAYS HELLO TO YOU!");
