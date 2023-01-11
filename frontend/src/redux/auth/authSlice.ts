@@ -1,5 +1,6 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
+import Cookies from "js-cookie";
 import { toast } from "react-hot-toast";
 import "../../axios/axios";
 import { IAuth, IResponse } from "../../interfaces/auth.internface";
@@ -43,14 +44,6 @@ export const login = createAsyncThunk(
   }
 );
 
-export const signOut = createAsyncThunk("auth/signOut", async () => {
-  try {
-    await axios.post("/auth/signout");
-  } catch (error) {
-    console.log(error);
-  }
-});
-
 const authSlice = createSlice({
   name: "auth",
   initialState,
@@ -61,6 +54,7 @@ const authSlice = createSlice({
       state.userId = action.payload.id;
     },
     unSetUser: (state) => {
+      Cookies.remove("userCredentials");
       state.isLoggedIn = false;
       state.username = "";
     },
@@ -84,7 +78,7 @@ const authSlice = createSlice({
       })
 
       .addCase(login.fulfilled, (state, action) => {
-        console.log(action.payload);
+        Cookies.set("userCredentials", JSON.stringify(action.payload.data));
         state.isLoggedIn = true;
         state.username = action.payload?.data.username;
         state.userId = action.payload?.data.id;

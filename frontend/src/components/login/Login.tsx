@@ -47,7 +47,7 @@ const Login: React.FC<ILogin> = ({ isSignUp }) => {
       navigate("/");
     } else {
       const res = await store.dispatch(login(data));
-      if (res.payload.status === "failure") {
+      if (res.payload?.status === "failure") {
         toast.error(res.payload.data);
         return;
       }

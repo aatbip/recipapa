@@ -71,9 +71,9 @@ const setNewAccessTokenByVerifyingRefreshToken = asyncWrapper(
     };
 
     res.cookie("userCredentials", JSON.stringify(userCredentials), {
-      httpOnly: true,
-      secure: true,
-      sameSite: "none",
+      // httpOnly: true,
+      // secure: false,
+      // sameSite: "none",
       // domain: "https://recipapa.netlify.app/",
       // path: "https://recipapa.netlify.app",
     });
@@ -101,9 +101,20 @@ const setUser = async (
 };
 
 export const checkIfTokenExpired = asyncWrapper(
-  (req: IGetAuthorizationHeaderRequest, res: Response, next: NextFunction) => {
-    if (req.user) {
-      return res.status(200).json(success("verified"));
+  async (req: Request, res: Response, next: NextFunction) => {
+    const authHeader = req.headers.authorization;
+    if (!authHeader || !authHeader.startsWith("Bearer")) {
+      return res
+        .status(404)
+        .json(
+          failure("Invalid authentication header. Please send bearer token. ")
+        );
     }
+    const accessToken = authHeader.split(" ")[1];
+    const { payload, expired } = verifyJwt(accessToken);
+    if (expired === "jwt expired") {
+      return res.status(200).json("Exp");
+    }
+    return res.status(200).json("Token not expired!")
   }
 );

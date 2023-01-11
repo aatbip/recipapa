@@ -56,9 +56,9 @@ const signIn = asyncWrapper(async (req: Request, res: Response) => {
   };
 
   res.cookie("userCredentials", JSON.stringify(userCredentials), {
-    httpOnly: true,
-    secure: true,
-    sameSite: "none",
+    // httpOnly: true,
+    // secure: false,
+    // sameSite: "none",
     // domain: "https://recipapa.netlify.app/",
     // path: "https://recipapa.netlify.app",
   });

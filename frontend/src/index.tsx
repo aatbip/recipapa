@@ -7,6 +7,7 @@ import store from "./redux/store";
 import { Provider } from "react-redux";
 import { BrowserRouter } from "react-router-dom";
 import { Toaster } from "react-hot-toast";
+import VerifySession from "./utils/VerifySession";
 
 const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement
@@ -15,12 +16,14 @@ root.render(
   <React.StrictMode>
     <Provider store={store}>
       <BrowserRouter>
-        <Toaster
-          toastOptions={{
-            duration: 1500,
-          }}
-        />
-        <App />
+        <VerifySession>
+          <Toaster
+            toastOptions={{
+              duration: 1500,
+            }}
+          />
+          <App />
+        </VerifySession>
       </BrowserRouter>
     </Provider>
   </React.StrictMode>

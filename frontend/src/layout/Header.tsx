@@ -1,7 +1,7 @@
 import React from "react";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { selectAuth, signOut, unSetUser } from "../redux/auth/authSlice";
+import { selectAuth, unSetUser } from "../redux/auth/authSlice";
 import store from "../redux/store";
 import styles from "./css/Layout.module.css";
 
@@ -10,7 +10,6 @@ const Header: React.FC = () => {
   const navigate = useNavigate();
 
   const logout = () => {
-    store.dispatch(signOut());
     store.dispatch(unSetUser());
   };
 

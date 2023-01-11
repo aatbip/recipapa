@@ -8,29 +8,6 @@ import { redirect, useLocation, useNavigate } from "react-router-dom";
 import React from "react";
 
 const App: React.FC = () => {
-  const navigate = useNavigate();
-
-  const location = useLocation();
-
-  const verifySession = async () => {
-    const userCredentials = Cookies.get("userCredentials");
-    if (userCredentials) {
-      store.dispatch(setUser(JSON.parse(userCredentials)));
-      if (location.pathname == "/") {
-        navigate("/app", { replace: true });
-      } else {
-        navigate(location.pathname);
-      }
-      return;
-    }
-    store.dispatch(unSetUser());
-    navigate("/");
-  };
-
-  React.useEffect(() => {
-    verifySession();
-  }, []);
-
   return <Router />;
 };
 
