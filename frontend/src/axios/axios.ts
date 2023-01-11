@@ -28,7 +28,6 @@ const setNewAccessToken = async (refreshToken: string) => {
   const res = await ax.post("/auth/refresh", {
     refreshToken: refreshToken,
   });
-  console.log(res); 
   const userCredentials = res.data;
   Cookies.set("userCredentials", JSON.stringify(userCredentials));
   return userCredentials.accessToken;

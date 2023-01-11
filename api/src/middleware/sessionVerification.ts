@@ -55,6 +55,7 @@ export const setNewAccessToken = asyncWrapper(
   ) => {
     const { refreshToken } = req.body;
 
+
     const isRefreshTokenExist = await RefreshToken.findOne({
       refreshToken: refreshToken,
     });
@@ -67,11 +68,12 @@ export const setNewAccessToken = asyncWrapper(
 
     const { payload, expired, error } = verifyJwt(refreshToken);
 
+
     if (expired === "jwt expired") {
       return next(error);
     }
 
-    const user = await User.findOne({ email: payload.email });
+    const user = await User.findOne({ username: payload.username });
     if (!user) {
       return res
         .status(400)

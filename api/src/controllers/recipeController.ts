@@ -55,6 +55,8 @@ const getUserRecipe = asyncWrapper(
   async (req: IGetAuthorizationHeaderRequest, res: Response) => {
     const { userId } = req.user;
 
+    console.log(userId); 
+
     const recipe = await Recipe.find({ userId: userId }).populate(
       "userId",
       "username"
