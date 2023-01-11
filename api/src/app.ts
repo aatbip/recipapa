@@ -30,7 +30,7 @@ app.use(
     extended: false,
   })
 );
-app.use(express.static(__dirname + "/public"));
+app.use(express.static(__dirname + "./../public"));
 app.use(
   cors({
     credentials: true,
