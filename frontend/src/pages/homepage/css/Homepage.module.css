@@ -65,6 +65,8 @@
   gap: 33.33px;
   flex-wrap: wrap;
   padding: 40px 0px;
+  width: 90%; 
+  margin: 0 auto; 
 }
 
 .search_area {

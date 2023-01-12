@@ -18,6 +18,8 @@ const MyRecipe = () => {
     store.dispatch(getUserRecipe());
   }, [isDeleted]);
 
+  
+
   return (
     <div className={styles.container}>
       <div className={styles.wrapper}>

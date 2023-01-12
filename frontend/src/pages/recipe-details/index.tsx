@@ -10,6 +10,7 @@ import styles from "./css/RecipeDetails.module.css";
 import searchStyles from "../searchPage/css/SearchPage.module.css";
 import { RecipeIngredient } from "../../interfaces/recipe.ingerface";
 import ImageSlider from "../../components/imageSlider/ImageSlider";
+import { ScrollToTop } from "../../utils/Scroll";
 
 const RecipeDetails = () => {
   const { recipeId } = useParams();
@@ -55,6 +56,7 @@ const RecipeDetails = () => {
 
   return (
     <div className={styles.container}>
+      <ScrollToTop />
       <div className={styles.wrapper}>
         <div className={searchStyles.search_container}>
           <div className={searchStyles.order_two}>

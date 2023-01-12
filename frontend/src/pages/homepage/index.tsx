@@ -116,7 +116,6 @@ const HomePage: React.FC = () => {
             recipe?.map((el) => {
               return (
                 <>
-
                   <RecipeCard key={el._id} isMyRecipe={false} recipe={el} />
                 </>
               );
