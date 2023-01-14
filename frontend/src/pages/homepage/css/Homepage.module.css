@@ -60,13 +60,28 @@
   text-align: center;
 }
 
+.recipe_card_container_isloading {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  padding: 100px 0px;
+  justify-content: space-between;
+  gap: 33.33px;
+  
+}
+
 .recipe_card_container {
   display: flex;
-  gap: 33.33px;
+  flex-direction: row;
   flex-wrap: wrap;
   padding: 40px 0px;
-  width: 90%; 
-  margin: 0 auto; 
+  justify-content: space-between;
+  gap: 33.33px;
+}
+
+.recipe_card_container::after {
+  content: "";
+  flex: 0 0 46%;
 }
 
 .search_area {

@@ -109,7 +109,7 @@ const HomePage: React.FC = () => {
           </p>
           <h1>Most Popular Recipes</h1>
         </div>
-        <div className={styles.recipe_card_container}>
+        <div className={isLoading ? styles.recipe_card_container_isloading: styles.recipe_card_container}>
           {isLoading ? (
             <Spinner isLoading={isLoading} positionAbsolute={false} />
           ) : (
